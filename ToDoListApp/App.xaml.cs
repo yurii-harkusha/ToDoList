@@ -4,6 +4,8 @@ using ToDoListApp.XAML.Behaviors;
 using Microsoft.Practices.Unity;
 using Prism.Navigation;
 using Prism.Unity;
+using ToDoListApp.ViewModels;
+using ToDoListApp.Views.Pages;
 
 namespace ToDoListApp
 {
@@ -30,8 +32,8 @@ namespace ToDoListApp
                 nsm.Attach(Container.Resolve<INavigationService>("UnityPageNavigationService"));
             }
 
-            this.Container.RegisterTypeForNavigation<StartView, StartViewModel>();
-                //.RegisterTypeForNavigation<LoginView, LoginViewModel>();
+            this.Container.RegisterTypeForNavigation<ToDoListAppNavigationPage, ToDoListAppNavigationPageViewModel>()
+                .RegisterTypeForNavigation<ToDoListPage, ToDoListPageViewModel>();
 
             ContainerManager.Container = Container;
         }
@@ -44,7 +46,11 @@ namespace ToDoListApp
 
             AutoMapperConfiguration.Execute();
 
-            var dummy = NavigationService.NavigateAsync(nameof(StartView));
+            var dummy = NavigationService.NavigateAsync(StartPageResolve());
+        }
+        protected string StartPageResolve()
+        {
+            return "ToDoListAppNavigationPage/ToDoListPage";
         }
 
         protected override void OnStart()

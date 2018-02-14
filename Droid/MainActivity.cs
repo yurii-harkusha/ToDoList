@@ -38,11 +38,6 @@ namespace ToDoListApp.Droid
             var app = new App(this);
 
             Window.SetSoftInputMode(SoftInput.AdjustResize);
-
-
-            Window.AddFlags(WindowManagerFlags.TranslucentStatus);
-            Window.AddFlags(WindowManagerFlags.LayoutInScreen);
-            Window.AddFlags(WindowManagerFlags.LayoutInsetDecor);
             
             LoadApplication(app);
         }

@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<behaviors:BaseContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+                 xmlns:local="clr-namespace:ToDoListApp"
+                 xmlns:behaviors="clr-namespace:ToDoListApp.XAML.Behaviors;assembly=ToDoListApp"
+                 xmlns:behaviors1="clr-namespace:Corcav.Behaviors;assembly=Corcav.Behaviors"
+                 xmlns:mvvm="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+                 x:Class="ToDoListApp.ToDoListPage"   
+                 mvvm:ViewModelLocator.AutowireViewModel="True" >
+    <behaviors:BaseContentPage.Content>
+        <Grid>
+            <ListView x:Name="listView"
+                  ItemsSource="{Binding ToDoItemsObservableCollection}"
+                  VerticalOptions="FillAndExpand"
+                  SeparatorVisibility="None">
+                <behaviors1:Interaction.Behaviors>
+                    <behaviors1:BehaviorCollection>
+                        <behaviors1:EventToCommand
+                            Command="{Binding ItemSelectedCommand}"
+                            EventName="ItemTapped"
+                            PassEventArgument="true" />
+                    </behaviors1:BehaviorCollection>
+                </behaviors1:Interaction.Behaviors>
+                <ListView.Header>
+                    <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                        <!--Header Here-->
+                    </StackLayout>
+                </ListView.Header>
+                <ListView.Behaviors>
+                    <behaviors:ListViewClearSelectionBehavior />
+                </ListView.Behaviors>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+    </behaviors:BaseContentPage.Content>
+</behaviors:BaseContentPage>
