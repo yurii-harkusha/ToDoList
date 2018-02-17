@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using ToDoListApp.XAML.Behaviors;
 using ToDoListApp.Models;
+using ToDoListApp.Services;
 
 namespace ToDoListApp.ViewModels
 {
@@ -16,11 +17,15 @@ namespace ToDoListApp.ViewModels
     {
         private INavigationService _navigationService;
         private  ObservableCollection<ToDoItem> _toDoItemsObservableCollection;
+        private FakeDataService _fakeDataService;
+        private ObservableCollection<ToDoItem> _toDoItems;
 
         public ToDoListPageViewModel(INavigationService navigationService, INavigationServiceManager nsm)
             : base(navigationService, nsm)
         {
             _navigationService = navigationService;
+            _fakeDataService = new FakeDataService();
+            ToDoItems = _fakeDataService.GetToDoItemsObservableCollection();
         }
 
         public override void OnNavigatedTo(NavigationParameters parameters)
@@ -45,9 +50,34 @@ namespace ToDoListApp.ViewModels
             }
         }
 
+        public ICommand Item2SelectedCommand
+        {
+            get
+            {
+                return new DelegateCommand<object>(ToDoItem2SelectedAsync);
+            }
+        }
+
         private void ToDoItemSelectedAsync(object obj)
         {
 
         }
+        private void ToDoItem2SelectedAsync(object obj)
+        {
+
+        }
+
+        public ObservableCollection<ToDoItem> ToDoItems
+        {
+            get
+            {
+                return _toDoItems;
+            }
+            set
+            {
+                SetProperty(ref _toDoItems, value);
+            }
+        }
+
     }
 }

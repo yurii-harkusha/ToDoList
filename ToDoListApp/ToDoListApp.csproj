@@ -45,6 +45,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="AkavacheSqliteLinkerOverride.cs" />
     <Compile Include="Helpers\Settings.cs" />
+    <Compile Include="Services\FakeDataService.cs" />
     <Compile Include="ViewModels\ToDoListAppNavigationPageViewModel.cs" />
     <Compile Include="ViewModels\ToDoListPageViewModel.cs" />
     <Compile Include="Views\Pages\ToDoListAppNavigationPage.cs" />
@@ -59,6 +60,9 @@
     <Compile Include="XAML\Converters\InverseBoolConverter.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="CardView, Version=1.1.1.5, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\XamarinForms.CardView.1.1.1.5\lib\portable45-net45+win8+wp8+wpa81\CardView.dll</HintPath>
+    </Reference>
     <Reference Include="Corcav.Behaviors, Version=2.3.7.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Corcav.Behaviors.2.3.7\lib\Corcav.Behaviors.dll</HintPath>
     </Reference>
@@ -184,8 +188,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Services\" />
     <Folder Include="Utils\" />
+    <Folder Include="Views\CustomElements\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Views\Pages\ToDoListPage.xaml">

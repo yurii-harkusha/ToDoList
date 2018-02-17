@@ -2,15 +2,20 @@
 <behaviors:BaseContentPage xmlns="http://xamarin.com/schemas/2014/forms"
                  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
                  xmlns:local="clr-namespace:ToDoListApp"
+                 xmlns:cardView="clr-namespace:CardView;assembly=CardView"
                  xmlns:behaviors="clr-namespace:ToDoListApp.XAML.Behaviors;assembly=ToDoListApp"
                  xmlns:behaviors1="clr-namespace:Corcav.Behaviors;assembly=Corcav.Behaviors"
+                 xmlns:customElements="clr-namespace:ToDoListApp.Views.CustomElements;assembly=ToDoListApp"
                  xmlns:mvvm="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
-                 x:Class="ToDoListApp.ToDoListPage"   
+                 x:Class="ToDoListApp.ToDoListPage"
+                 x:Name="RootElement"
                  mvvm:ViewModelLocator.AutowireViewModel="True" >
     <behaviors:BaseContentPage.Content>
         <Grid>
             <ListView x:Name="listView"
-                  ItemsSource="{Binding ToDoItemsObservableCollection}"
+                  ItemsSource="{Binding ToDoItems}"
+                  RowHeight="180" 
+                  HasUnevenRows="True"
                   VerticalOptions="FillAndExpand"
                   SeparatorVisibility="None">
                 <behaviors1:Interaction.Behaviors>
@@ -31,8 +36,128 @@
                 </ListView.Behaviors>
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <ViewCell>
-                            
+                        <ViewCell >
+                            <ViewCell.View>
+                                <cardView:CardView Margin="15,10,15,10" 
+                                    BackgroundColor="#E8EAF6"
+                                    CardViewHasShadow="True"
+                                    CardViewHorizontalOptions="FillAndExpand"
+                                    HorizontalOptions="FillAndExpand"
+                                    VerticalOptions="FillAndExpand">
+                                    <cardView:CardView.CardViewContent>
+                                        <Grid HorizontalOptions="FillAndExpand" 
+                                            VerticalOptions="FillAndExpand">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="9*" />
+                                                <ColumnDefinition Width="1" />
+                                                <ColumnDefinition Width="2*" />
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="4*" />
+                                                <RowDefinition Height="1" />
+                                                <RowDefinition Height="1*" />
+                                            </Grid.RowDefinitions>
+
+                                            <Grid 
+                                                Grid.Row="0"
+                                                Grid.Column="0"
+                                                HorizontalOptions="FillAndExpand" 
+                                                VerticalOptions="FillAndExpand"
+                                                Padding="10,10,10,10">
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="5*" />
+                                                    <RowDefinition Height="2*" />
+                                                </Grid.RowDefinitions>
+                                                <Label
+                                                    Grid.Row="0"
+                                                    HorizontalOptions="Start"
+                                                    VerticalOptions="Center"
+                                                    LineBreakMode="TailTruncation"
+                                                    TextColor="Black"
+                                                    Text="{Binding Title}"
+                                                    FontSize="36"/>
+                                                <Label
+                                                    Grid.Row="1"
+                                                    HorizontalOptions="Start"
+                                                    VerticalOptions="Center"
+                                                    LineBreakMode="TailTruncation"
+                                                    TextColor="#9E9E9E"
+                                                    Text="{Binding Text}"
+                                                    FontSize="16"/>
+                                            </Grid>
+                                            <BoxView 
+                                                Grid.Row="1"
+                                                Grid.ColumnSpan="2"
+                                                Margin="2,0,0,0"
+                                                VerticalOptions="Start"
+                                                BackgroundColor="#E0E0E0"
+                                                HorizontalOptions="FillAndExpand"
+                                                HeightRequest="1"/>
+
+                                            <StackLayout  Margin="10,0,10,0"
+                                                Grid.Row="2" Orientation="Horizontal"
+                                                HorizontalOptions="FillAndExpand"
+                                                VerticalOptions="FillAndExpand">
+                                                <Label
+                                                    LineBreakMode="TailTruncation"
+                                                    Text="Created: "
+                                                    FontSize="13"/>
+                                                <Label
+                                                    LineBreakMode="TailTruncation"
+                                                    Text="{Binding CreatedDate}"
+                                                    FontSize="13"/>
+                                            </StackLayout>
+                                            <BoxView 
+                                                Grid.Row="0"
+                                                Grid.RowSpan="3"
+                                                Grid.Column="1"
+                                                Margin="0,1,0,0"
+                                                VerticalOptions="FillAndExpand"
+                                                BackgroundColor="#E0E0E0"
+                                                HorizontalOptions="Start"
+                                                WidthRequest="1"/>
+                                            <Grid HorizontalOptions="FillAndExpand" 
+                                                VerticalOptions="FillAndExpand"
+                                                BackgroundColor="Goldenrod"
+                                                Grid.RowSpan="3"
+                                                Grid.Column="2">
+                                                <StackLayout
+                                                    HorizontalOptions="Center" 
+                                                    VerticalOptions="Center"
+                                                    BackgroundColor="Green"
+                                                    Orientation="Vertical">
+                                                    <Image
+                                                        Grid.RowSpan="3"
+                                                        Grid.Column="2"
+                                                        Source="to_do_item_active.png"                                        
+                                                        HorizontalOptions="Start"
+                                                        Aspect="AspectFit"
+                                                        VerticalOptions="Start"
+                                                        BackgroundColor="Red"
+                                                        HeightRequest="40"
+                                                        WidthRequest="40"/>
+                                                    <Label
+                                                        HorizontalOptions="Start"
+                                                        VerticalOptions="Start"
+                                                        LineBreakMode="TailTruncation"
+                                                        Text="Status:"
+                                                        FontSize="10"/>
+                                                    <Label
+                                                        Margin="0,-5,0,0"
+                                                        HorizontalOptions="Start"
+                                                        VerticalOptions="Start"
+                                                        LineBreakMode="TailTruncation"
+                                                        Text="Active"
+                                                        FontSize="10"/>
+                                                </StackLayout>
+                                                <Grid.GestureRecognizers>
+                                                    <TapGestureRecognizer Command="{Binding Source={x:Reference RootElement}, Path=BindingContext.Item2SelectedCommand}"/>
+                                                </Grid.GestureRecognizers>
+                                            </Grid>
+                                        </Grid>
+                                    </cardView:CardView.CardViewContent>
+                                </cardView:CardView>
+                            </ViewCell.View>
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
