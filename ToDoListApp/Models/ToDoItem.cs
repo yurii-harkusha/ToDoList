@@ -1,19 +1,92 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using ToDoListApp.Models.DTO;
+using ToDoListApp.Models.Enums;
 
 namespace ToDoListApp.Models
 {
-    public class ToDoItem
+    public class ToDoItem : ToDoItemDto, INotifyPropertyChanged
     {
-        public string Id { get; set; }
-        public string AuthorId { get; set; }
-        public string Title { get; set; }
-        public string Text { get; set; }
-        public bool IsDone {get; set; }
-        public DateTime CreatedDate { get; set; }
-        public DateTime ModifiedDate { get; set; }
+        private bool _isDone;
+        private string _statusImage;
+        private DateTime _itemCreatedDate;
+        private DateTime _itemModifiedDate;
+
+        public new bool IsDone
+        {
+            get { return _isDone; }
+            set
+            {
+                _isDone = value;
+                OnPropertyChanged(nameof(IsDone));
+                OnPropertyChanged(nameof(StatusImage));
+                OnPropertyChanged(nameof(Status));
+            }
+        }
+
+        [JsonIgnore]
+        public string StatusImage
+        {
+            get
+            {
+                if (IsDone)
+                {
+                    return "to_do_item_done.png";
+                }
+                else
+                {
+                    return "to_do_item_active.png";
+                }
+            }
+        }
+
+        [JsonIgnore]
+        public string Status
+        {
+            get
+            {
+                if (IsDone)
+                {
+                    return Enum.GetName(typeof(ToDoItemStatuses), ToDoItemStatuses.Done);
+                }
+                else
+                {
+                    return Enum.GetName(typeof(ToDoItemStatuses), ToDoItemStatuses.Active);
+                }
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        public DateTime ItemCreatedDate
+        {
+            get { return _itemCreatedDate; }
+            set
+            {
+                _itemCreatedDate = value;
+                OnPropertyChanged(nameof(ItemCreatedDate));
+            }
+        }
+
+        public DateTime ItemModifiedDate
+        {
+            get { return _itemModifiedDate; }
+            set
+            {
+                _itemModifiedDate = value;
+                OnPropertyChanged(nameof(ItemModifiedDate));
+            }
+        }
     }
 }

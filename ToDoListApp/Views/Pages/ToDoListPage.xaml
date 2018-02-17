@@ -11,8 +11,8 @@
                  x:Name="RootElement"
                  mvvm:ViewModelLocator.AutowireViewModel="True" >
     <behaviors:BaseContentPage.Content>
-        <Grid>
-            <ListView x:Name="listView"
+        <ListView x:Name="listView"
+                  Grid.Row="0"
                   ItemsSource="{Binding ToDoItems}"
                   RowHeight="180" 
                   HasUnevenRows="True"
@@ -26,11 +26,17 @@
                             PassEventArgument="true" />
                     </behaviors1:BehaviorCollection>
                 </behaviors1:Interaction.Behaviors>
-                <ListView.Header>
-                    <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-                        <!--Header Here-->
-                    </StackLayout>
-                </ListView.Header>
+            <ListView.Header>
+                <Button HeightRequest="75"
+                        BorderColor="#BDBDBD"
+                        BorderRadius="1"
+                        Margin="12,15,12,5"
+                        Image="new_to_do_item_create.png"
+                        Text="Create new ToDo item"
+                        TextColor="Black"
+                        BackgroundColor="#F8BBD0"
+                        FontSize="20"/>
+            </ListView.Header>
                 <ListView.Behaviors>
                     <behaviors:ListViewClearSelectionBehavior />
                 </ListView.Behaviors>
@@ -95,7 +101,8 @@
                                                 HeightRequest="1"/>
 
                                             <StackLayout  Margin="10,0,10,0"
-                                                Grid.Row="2" Orientation="Horizontal"
+                                                Grid.Row="2" 
+                                                Orientation="Horizontal"
                                                 HorizontalOptions="FillAndExpand"
                                                 VerticalOptions="FillAndExpand">
                                                 <Label
@@ -104,7 +111,7 @@
                                                     FontSize="13"/>
                                                 <Label
                                                     LineBreakMode="TailTruncation"
-                                                    Text="{Binding CreatedDate}"
+                                                    Text="{Binding ItemCreatedDate}"
                                                     FontSize="13"/>
                                             </StackLayout>
                                             <BoxView 
@@ -118,22 +125,19 @@
                                                 WidthRequest="1"/>
                                             <Grid HorizontalOptions="FillAndExpand" 
                                                 VerticalOptions="FillAndExpand"
-                                                BackgroundColor="Goldenrod"
                                                 Grid.RowSpan="3"
                                                 Grid.Column="2">
                                                 <StackLayout
                                                     HorizontalOptions="Center" 
                                                     VerticalOptions="Center"
-                                                    BackgroundColor="Green"
                                                     Orientation="Vertical">
                                                     <Image
                                                         Grid.RowSpan="3"
                                                         Grid.Column="2"
-                                                        Source="to_do_item_active.png"                                        
+                                                        Source="{Binding StatusImage}"                                        
                                                         HorizontalOptions="Start"
                                                         Aspect="AspectFit"
                                                         VerticalOptions="Start"
-                                                        BackgroundColor="Red"
                                                         HeightRequest="40"
                                                         WidthRequest="40"/>
                                                     <Label
@@ -147,7 +151,7 @@
                                                         HorizontalOptions="Start"
                                                         VerticalOptions="Start"
                                                         LineBreakMode="TailTruncation"
-                                                        Text="Active"
+                                                        Text="{Binding Status}"
                                                         FontSize="10"/>
                                                 </StackLayout>
                                                 <Grid.GestureRecognizers>
@@ -162,6 +166,5 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-        </Grid>
     </behaviors:BaseContentPage.Content>
 </behaviors:BaseContentPage>

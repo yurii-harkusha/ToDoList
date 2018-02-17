@@ -19,8 +19,8 @@ namespace ToDoListApp.Services
                 AuthorId = "80F23C33-85A2-42DB-AD2A-7C9C0C3513C0",
                 Title = "Item 1",
                 Text = "Test To Do Item 1",
-                CreatedDate = DateTime.Now,
-                ModifiedDate = DateTime.Now
+                ItemCreatedDate = DateTime.Now,
+                ItemModifiedDate = DateTime.Now
             };
             var item2 = new ToDoItem()
             {
@@ -28,8 +28,8 @@ namespace ToDoListApp.Services
                 AuthorId = "80F23C33-85A2-42DB-AD2A-7C9C0C3513C0",
                 Title = "Item 2",
                 Text = "Test To Do Item 2",
-                CreatedDate = DateTime.Now,
-                ModifiedDate = DateTime.Now
+                ItemCreatedDate = DateTime.Now,
+                ItemModifiedDate = DateTime.Now
             };
             var item3 = new ToDoItem()
             {
@@ -37,8 +37,9 @@ namespace ToDoListApp.Services
                 AuthorId = "80F23C33-85A2-42DB-AD2A-7C9C0C3513C0",
                 Title = "Item 3",
                 Text = "Test To Do Item 3",
-                CreatedDate = DateTime.Now,
-                ModifiedDate = DateTime.Now
+                ItemCreatedDate = DateTime.Now,
+                ItemModifiedDate = DateTime.Now,
+                IsDone = true
             };
             var item4 = new ToDoItem()
             {
@@ -46,8 +47,8 @@ namespace ToDoListApp.Services
                 AuthorId = "80F23C33-85A2-42DB-AD2A-7C9C0C3513C0",
                 Title = "Item 4",
                 Text = "Test To Do Item 4",
-                CreatedDate = DateTime.Now,
-                ModifiedDate = DateTime.Now
+                ItemCreatedDate = DateTime.Now,
+                ItemModifiedDate = DateTime.Now
             };
             var item5 = new ToDoItem()
             {
@@ -55,8 +56,9 @@ namespace ToDoListApp.Services
                 AuthorId = "80F23C33-85A2-42DB-AD2A-7C9C0C3513C0",
                 Title = "Item 5",
                 Text = "Test To Do Item 5",
-                CreatedDate = DateTime.Now,
-                ModifiedDate = DateTime.Now
+                ItemCreatedDate = DateTime.Now,
+                ItemModifiedDate = DateTime.Now,
+                IsDone = true
             };
             toDoItems.Add(item1);
             toDoItems.Add(item2);

@@ -36,7 +36,10 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="AutoMapperConfiguration.cs" />
+    <Compile Include="Models\DTO\BaseDto.cs" />
+    <Compile Include="Models\Enums\ToDoItemStatuses.cs" />
     <Compile Include="Models\ToDoItem.cs" />
+    <Compile Include="Models\DTO\ToDoItemDto.cs" />
     <Compile Include="MVVM\BaseViewModel.cs" />
     <Compile Include="MVVM\BaseContentPage.cs" />
     <Compile Include="MVVM\ContainerManager.cs" />
