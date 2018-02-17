@@ -14,7 +14,6 @@ namespace ToDoListApp.Models
     public class ToDoItem : ToDoItemDto, INotifyPropertyChanged
     {
         private bool _isDone;
-        private string _statusImage;
         private DateTime _itemCreatedDate;
         private DateTime _itemModifiedDate;
 

@@ -15,7 +15,6 @@ namespace ToDoListApp.Services
             var toDoItems = new ObservableCollection<ToDoItem>();
             var item1 = new ToDoItem()
             {
-                Id = new Guid().ToString(),
                 AuthorId = "80F23C33-85A2-42DB-AD2A-7C9C0C3513C0",
                 Title = "Item 1",
                 Text = "Test To Do Item 1",
@@ -24,7 +23,6 @@ namespace ToDoListApp.Services
             };
             var item2 = new ToDoItem()
             {
-                Id = new Guid().ToString(),
                 AuthorId = "80F23C33-85A2-42DB-AD2A-7C9C0C3513C0",
                 Title = "Item 2",
                 Text = "Test To Do Item 2",
@@ -33,7 +31,6 @@ namespace ToDoListApp.Services
             };
             var item3 = new ToDoItem()
             {
-                Id = new Guid().ToString(),
                 AuthorId = "80F23C33-85A2-42DB-AD2A-7C9C0C3513C0",
                 Title = "Item 3",
                 Text = "Test To Do Item 3",
@@ -43,7 +40,6 @@ namespace ToDoListApp.Services
             };
             var item4 = new ToDoItem()
             {
-                Id = new Guid().ToString(),
                 AuthorId = "80F23C33-85A2-42DB-AD2A-7C9C0C3513C0",
                 Title = "Item 4",
                 Text = "Test To Do Item 4",
@@ -52,7 +48,6 @@ namespace ToDoListApp.Services
             };
             var item5 = new ToDoItem()
             {
-                Id = new Guid().ToString(),
                 AuthorId = "80F23C33-85A2-42DB-AD2A-7C9C0C3513C0",
                 Title = "Item 5",
                 Text = "Test To Do Item 5",

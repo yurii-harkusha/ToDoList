@@ -10,6 +10,8 @@ using System.Windows.Input;
 using ToDoListApp.XAML.Behaviors;
 using ToDoListApp.Models;
 using ToDoListApp.Services;
+using Xamarin.Forms;
+using Acr.UserDialogs;
 
 namespace ToDoListApp.ViewModels
 {
@@ -19,6 +21,7 @@ namespace ToDoListApp.ViewModels
         private  ObservableCollection<ToDoItem> _toDoItemsObservableCollection;
         private FakeDataService _fakeDataService;
         private ObservableCollection<ToDoItem> _toDoItems;
+        private ToDoItem _selectedToDoItem;
 
         public ToDoListPageViewModel(INavigationService navigationService, INavigationServiceManager nsm)
             : base(navigationService, nsm)
@@ -50,21 +53,67 @@ namespace ToDoListApp.ViewModels
             }
         }
 
-        public ICommand Item2SelectedCommand
+        public ICommand ChangeItemStatusCommand
         {
             get
             {
-                return new DelegateCommand<object>(ToDoItem2SelectedAsync);
+                return new DelegateCommand<object>(ChangeItemStatusAsync);
             }
         }
 
-        private void ToDoItemSelectedAsync(object obj)
+        public ICommand RemoveItemCommand
         {
-
+            get
+            {
+                return new DelegateCommand<object>(RemoveItemAsync);
+            }
         }
-        private void ToDoItem2SelectedAsync(object obj)
-        {
 
+        private void ToDoItemSelectedAsync(object arg)
+        {
+            var selectedToDoItem = ((ItemTappedEventArgs)arg).Item as ToDoItem;
+
+            if (selectedToDoItem != null)
+            {
+
+            }
+        }
+
+        private async void RemoveItemAsync(object arg)
+        {
+            var selectedToDoItem = arg as ToDoItem;
+
+            if (selectedToDoItem != null)
+            {
+                if (await UserDialogs.Instance.ConfirmAsync($"Are you sure that you want to remove the item?", "Remove", "Yes", "Cancel"))
+                {
+                    ToDoItems.Remove(ToDoItems.Where(x => x.Id == selectedToDoItem.Id).FirstOrDefault());
+                }
+            }
+        }
+        private async void ChangeItemStatusAsync(object arg)
+        {
+            var selectedToDoItem = arg as ToDoItem;
+
+            if (selectedToDoItem != null)
+            {
+                bool isOldStatusValueDone = ToDoItems.Where(x => x.Id == selectedToDoItem.Id).FirstOrDefault().IsDone;
+                string statusNameForQuestion;
+                if (isOldStatusValueDone)
+                {
+                    statusNameForQuestion = "active";
+                }
+                else
+                {
+                    statusNameForQuestion = "done";
+                }
+
+                if (await UserDialogs.Instance.ConfirmAsync($"Are you sure that you want to mark the item as {statusNameForQuestion}?", "Change status", "Yes", "Cancel"))
+                {
+                    bool isNewStatusValueDone = !isOldStatusValueDone;
+                    ToDoItems.Where(x => x.Id == selectedToDoItem.Id).FirstOrDefault().IsDone = isNewStatusValueDone;
+                }
+            }
         }
 
         public ObservableCollection<ToDoItem> ToDoItems

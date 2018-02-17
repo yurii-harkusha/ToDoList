@@ -8,7 +8,11 @@ namespace ToDoListApp.Models.DTO
 {
     public class BaseDto
     {
-        public string Id { get; set; }
+        public BaseDto()
+        {
+            Id = Guid.NewGuid().ToString().ToUpper();
+        }
+        public string Id { get;}
 
         public DateTimeOffset CreatedDate { get; set; }
 

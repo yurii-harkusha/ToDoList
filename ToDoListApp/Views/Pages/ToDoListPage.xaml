@@ -15,7 +15,6 @@
                   Grid.Row="0"
                   ItemsSource="{Binding ToDoItems}"
                   RowHeight="180" 
-                  HasUnevenRows="True"
                   VerticalOptions="FillAndExpand"
                   SeparatorVisibility="None">
                 <behaviors1:Interaction.Behaviors>
@@ -101,18 +100,42 @@
                                                 HeightRequest="1"/>
 
                                             <StackLayout  Margin="10,0,10,0"
-                                                Grid.Row="2" 
+                                                Grid.Row="1"
+                                                Grid.RowSpan="2"
                                                 Orientation="Horizontal"
                                                 HorizontalOptions="FillAndExpand"
-                                                VerticalOptions="FillAndExpand">
-                                                <Label
-                                                    LineBreakMode="TailTruncation"
-                                                    Text="Created: "
-                                                    FontSize="13"/>
-                                                <Label
-                                                    LineBreakMode="TailTruncation"
-                                                    Text="{Binding ItemCreatedDate}"
-                                                    FontSize="13"/>
+                                                VerticalOptions="CenterAndExpand">
+                                                <StackLayout HorizontalOptions="Start"
+                                                             VerticalOptions="FillAndExpand">
+                                                    <Image
+                                                        Source="remove_to_do_item.png"                                        
+                                                        HorizontalOptions="Start"
+                                                        Aspect="AspectFit"
+                                                        VerticalOptions="Center"
+                                                        HeightRequest="22"
+                                                        WidthRequest="22"/>
+                                                    <Grid.GestureRecognizers>
+                                                        <TapGestureRecognizer Command="{Binding Source={x:Reference RootElement}, Path=BindingContext.RemoveItemCommand}" CommandParameter="{Binding .}"/>
+                                                    </Grid.GestureRecognizers>
+                                                </StackLayout>
+                                                <StackLayout 
+                                                    Margin="15,0,0,0"
+                                                    Orientation="Horizontal" 
+                                                    HorizontalOptions="Start" 
+                                                    VerticalOptions="Center">
+                                                    <Label
+                                                        LineBreakMode="TailTruncation"
+                                                        Text="Created: "
+                                                        FontSize="13"
+                                                        VerticalOptions="Center"
+                                                        VerticalTextAlignment="Center"/>
+                                                    <Label
+                                                        LineBreakMode="TailTruncation"
+                                                        Text="{Binding ItemCreatedDate}"
+                                                        FontSize="13"
+                                                        VerticalOptions="Center"
+                                                        VerticalTextAlignment="Center"/>
+                                                </StackLayout>
                                             </StackLayout>
                                             <BoxView 
                                                 Grid.Row="0"
@@ -155,7 +178,7 @@
                                                         FontSize="10"/>
                                                 </StackLayout>
                                                 <Grid.GestureRecognizers>
-                                                    <TapGestureRecognizer Command="{Binding Source={x:Reference RootElement}, Path=BindingContext.Item2SelectedCommand}"/>
+                                                    <TapGestureRecognizer Command="{Binding Source={x:Reference RootElement}, Path=BindingContext.ChangeItemStatusCommand}" CommandParameter="{Binding .}"/>
                                                 </Grid.GestureRecognizers>
                                             </Grid>
                                         </Grid>
