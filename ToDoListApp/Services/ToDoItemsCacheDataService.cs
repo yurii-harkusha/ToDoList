@@ -10,6 +10,7 @@ using ToDoListApp.Models;
 using ToDoListApp.Services.HttpService;
 using System.Reactive.Linq;
 using ToDoListApp.Interfaces;
+using System.Diagnostics;
 
 namespace ToDoListApp.Services
 {
@@ -24,7 +25,14 @@ namespace ToDoListApp.Services
         public async Task<List<ToDoItem>> GetToDoItemsAsync()
         {
             _toDoItems = null;
-            _toDoItems = await BlobCache.UserAccount.GetObject<List<ToDoItem>>("toDoItems");
+            try
+            {
+                _toDoItems = await BlobCache.UserAccount.GetObject<List<ToDoItem>>("toDoItems");
+            }
+            catch(Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
             return _toDoItems;
         }
 
@@ -32,7 +40,14 @@ namespace ToDoListApp.Services
         {
             _toDoItems = null;
             _toDoItems = toDoItems;
-            BlobCache.UserAccount.InsertObject("toDoItems", _toDoItems);
+            try
+            {
+                BlobCache.UserAccount.InsertObject("toDoItems", _toDoItems);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
         }
     }
 }
