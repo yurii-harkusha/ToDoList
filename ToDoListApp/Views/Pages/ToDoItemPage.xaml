@@ -12,18 +12,19 @@
                  mvvm:ViewModelLocator.AutowireViewModel="True" >
     <behaviors:BaseContentPage.ToolbarItems>
         <ToolbarItem 
-            Icon="remove_white_toolbar_item.png" 
+            Icon="{StaticResource RemoveWhiteToolbarItemImage}"
             Command="{Binding RemoveCurrentToDoItemCommand}"/>
     </behaviors:BaseContentPage.ToolbarItems>
     <behaviors:BaseContentPage.Content>
-        <ScrollView HorizontalOptions="FillAndExpand" 
-                    VerticalOptions="FillAndExpand">
+        <ScrollView 
+            HorizontalOptions="FillAndExpand" 
+            VerticalOptions="FillAndExpand">
             <StackLayout 
                 Orientation="Vertical" 
                 HorizontalOptions="FillAndExpand"
                 VerticalOptions="FillAndExpand">
                 <cardView:CardView 
-                    BackgroundColor="#E8EAF6" 
+                    BackgroundColor="{StaticResource CardViewBackgroundColor}" 
                     Margin="15,15,15,15" 
                     CardViewHasShadow="True"
                     CardViewHorizontalOptions="FillAndExpand"
@@ -34,24 +35,24 @@
                         <ScrollView 
                             HorizontalOptions="FillAndExpand" 
                             VerticalOptions="FillAndExpand">
-                            <Grid HorizontalOptions="FillAndExpand" 
-                                            VerticalOptions="FillAndExpand">
+                            <Grid 
+                                HorizontalOptions="FillAndExpand" 
+                                VerticalOptions="FillAndExpand">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="1*" />
                                     <RowDefinition Height="4*" />
                                 </Grid.RowDefinitions>
-
                                 <Entry
                                     Grid.Row="0"
                                     Margin="10,0,10,0"
                                     HorizontalOptions="FillAndExpand"
                                     VerticalOptions="Center"
                                     TextColor="Black"
-                                    Placeholder="Title"
+                                    Placeholder="{StaticResource TitlePlaceholderText}"
                                     Text="{Binding CurrentToDoItem.Title, Mode=TwoWay}"
                                     FontSize="36"/>
                                 <customElements:ToDoEditor
-                                    Placeholder="Details"
+                                    Placeholder="{StaticResource DetailsPlaceholderText}"
                                     Text="{Binding CurrentToDoItem.Text, Mode=TwoWay}"
                                     Margin="10,0,10,0"
                                     Grid.Row="1"
@@ -66,14 +67,14 @@
                 </cardView:CardView>
                 <Button 
                     HeightRequest="75"
-                    BorderColor="#BDBDBD"
+                    BorderColor="{StaticResource ButtonBorderdColor}"
                     Command="{Binding SaveToDoItemCommand}"
                     BorderRadius="1"
                     Margin="12,5,12,15"
-                    Image="save_changes.png"
-                    Text="Save changes"
+                    Image="{StaticResource SaveChangesImage}"
+                    Text="{StaticResource SaveChangesText}"
                     TextColor="Black"
-                    BackgroundColor="#F8BBD0"
+                    BackgroundColor="{StaticResource ButtonBackgroundColor}"
                     FontSize="20"/>
             </StackLayout>
         </ScrollView>

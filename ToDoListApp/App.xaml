@@ -5,7 +5,39 @@
              x:Class="ToDoListApp.App">
 	<Application.Resources>
 		<ResourceDictionary>
-		<behaviors:InverseBoolConverter x:Key="InverseBoolConverter"/>
+      <Color x:Key="CardViewBackgroundColor">#E8EAF6</Color>
+      <Color x:Key="ButtonBorderdColor">#BDBDBD</Color>
+      <Color x:Key="ButtonBackgroundColor">#F8BBD0</Color>
+      <Color x:Key="CardItemDetailColor">#9E9E9E</Color>
+      <Color x:Key="CardItemLineColor">#E0E0E0</Color>
+      <Color x:Key="MainColor">#0D0077</Color>      
+
+      <x:String x:Key="SaveChangesText">Save changes</x:String>
+      <x:String x:Key="TitlePlaceholderText">Title</x:String>
+      <x:String x:Key="DetailsPlaceholderText">Details</x:String>
+      <x:String x:Key="CreateNewItemText">Create new item</x:String>
+      <x:String x:Key="CreatedText">Created: </x:String>
+      <x:String x:Key="StatusText">Status:</x:String>
+      <x:String x:Key="AreYouSureRemoveText">Are you sure that you want to remove current item?</x:String>
+      <x:String x:Key="RemoveText">Remove</x:String>
+      <x:String x:Key="YesText">Yes</x:String>
+      <x:String x:Key="CancelText">Cancel</x:String>      
+      <x:String x:Key="AreYouSureMarkItemText">Are you sure that you want to mark the item as </x:String>
+      <x:String x:Key="ChangeStatusText">Change status</x:String>
+      <x:String x:Key="ActiveText">active</x:String>
+      <x:String x:Key="DoneText">done</x:String>
+
+
+
+
+      <x:String x:Key="SaveChangesImage">save_changes.png</x:String>
+      <x:String x:Key="RemoveWhiteToolbarItemImage">remove_white_toolbar_item.png</x:String>
+      <x:String x:Key="NewToDoItemCreateImage">new_to_do_item_create.png</x:String>
+      <x:String x:Key="RemoveToDoItemImage">remove_to_do_item.png</x:String>
+      
+
+
+      <behaviors:InverseBoolConverter x:Key="InverseBoolConverter"/>
 			</ResourceDictionary>
 	</Application.Resources>
 </unity:PrismApplication>

@@ -163,14 +163,16 @@ namespace ToDoListApp.ViewModels
                 string statusNameForQuestion;
                 if (isOldStatusValueDone)
                 {
-                    statusNameForQuestion = "active";
+                    statusNameForQuestion = Application.Current.Resources["ActiveText"].ToString();
                 }
                 else
                 {
-                    statusNameForQuestion = "done";
+                    statusNameForQuestion = Application.Current.Resources["DoneText"].ToString();
                 }
-
-                if (await UserDialogs.Instance.ConfirmAsync($"Are you sure that you want to mark the item as {statusNameForQuestion}?", "Change status", "Yes", "Cancel"))
+                if (await UserDialogs.Instance.ConfirmAsync($"{Application.Current.Resources["AreYouSureMarkItemText"].ToString()} {statusNameForQuestion}?", 
+                    Application.Current.Resources["ChangeStatusText"].ToString(), 
+                    Application.Current.Resources["YesText"].ToString(), 
+                    Application.Current.Resources["CancelText"].ToString()))
                 {
                     bool isNewStatusValueDone = !isOldStatusValueDone;
                     ToDoItems.Where(x => x.Id == selectedToDoItem.Id).FirstOrDefault().IsDone = isNewStatusValueDone;

@@ -20,7 +20,7 @@ namespace ToDoListApp.Views.Pages
             ChildPage = root;
 
             this.BarTextColor = Color.Black;
-            this.BarBackgroundColor = Color.FromHex("#0d0077");
+            this.BarBackgroundColor = Color.FromHex("#0D0077");
 
             if (ChildPage != null)
             {

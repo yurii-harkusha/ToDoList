@@ -2,9 +2,7 @@
 using Prism.Navigation;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using ToDoListApp.XAML.Behaviors;
@@ -12,7 +10,6 @@ using ToDoListApp.Models;
 using ToDoListApp.Services;
 using Xamarin.Forms;
 using Acr.UserDialogs;
-using Akavache;
 
 namespace ToDoListApp.ViewModels
 {
@@ -111,7 +108,10 @@ namespace ToDoListApp.ViewModels
 
         private async void RemoveCurrentToDoItemAsync(object arg)
         {
-            if (await UserDialogs.Instance.ConfirmAsync($"Are you sure that you want to remove current item?", "Remove", "Yes", "Cancel"))
+            if (await UserDialogs.Instance.ConfirmAsync(Application.Current.Resources["AreYouSureRemoveText"].ToString(),
+                Application.Current.Resources["RemoveText"].ToString(),
+                Application.Current.Resources["YesText"].ToString(),
+                Application.Current.Resources["CancelText"].ToString()))
             {
                 var toDoItems = await _toDoItemsCacheDataService.GetToDoItemsAsync();
                 if (toDoItems != null)
