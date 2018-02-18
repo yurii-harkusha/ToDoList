@@ -23,14 +23,14 @@ namespace ToDoListApp.Services
             var item2 = new ToDoItem()
             {
                 AuthorId = "80F23C33-85A2-42DB-AD2A-7C9C0C3513C0",
-                Title = "Item 2",
+                Title = "Item 45",
                 Text = "Test To Do Item 2",
                 ModifiedDate = DateTime.Now
             };
             var item3 = new ToDoItem()
             {
                 AuthorId = "80F23C33-85A2-42DB-AD2A-7C9C0C3513C0",
-                Title = "Item 3",
+                Title = "Item 43",
                 Text = "Test To Do Item 3",
                 ModifiedDate = DateTime.Now,
                 IsDone = true

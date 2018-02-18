@@ -10,6 +10,11 @@
                  x:Class="ToDoListApp.ToDoListPage"
                  x:Name="RootElement"
                  mvvm:ViewModelLocator.AutowireViewModel="True" >
+    <behaviors:BaseContentPage.ToolbarItems>
+        <ToolbarItem 
+            Icon="{Binding SortingTypeImage}" 
+            Command="{Binding ChangeSortingTypeForToDoItemsCommand}"/>
+    </behaviors:BaseContentPage.ToolbarItems>
     <behaviors:BaseContentPage.Content>
         <ListView x:Name="listView"
                   Grid.Row="0"

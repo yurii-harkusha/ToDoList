@@ -12,6 +12,7 @@ using ToDoListApp.Models;
 using ToDoListApp.Services;
 using Xamarin.Forms;
 using Acr.UserDialogs;
+using ToDoListApp.Helpers;
 
 namespace ToDoListApp.ViewModels
 {
@@ -22,13 +23,18 @@ namespace ToDoListApp.ViewModels
         private FakeDataService _fakeDataService;
         private ObservableCollection<ToDoItem> _toDoItems;
         private ToDoItem _selectedToDoItem;
+        private bool _sortingByAplhabet;
+        private string _sortingTypeImage;
+        private ToDoItemSortHelper _toDoItemSortHelper;
 
         public ToDoListPageViewModel(INavigationService navigationService, INavigationServiceManager nsm)
             : base(navigationService, nsm)
         {
             _navigationService = navigationService;
+            _toDoItemSortHelper = new ToDoItemSortHelper();
             _fakeDataService = new FakeDataService();
-            ToDoItems = _fakeDataService.GetToDoItemsObservableCollection();
+            SortingByAlphabet = true;
+            ToDoItems = SortToDoItems(_fakeDataService.GetToDoItemsObservableCollection());
         }
 
         public override void OnNavigatedTo(NavigationParameters parameters)
@@ -74,6 +80,32 @@ namespace ToDoListApp.ViewModels
             get
             {
                 return new DelegateCommand<object>(CreateNewItemAsync);
+            }
+        }
+
+        public ICommand ChangeSortingTypeForToDoItemsCommand
+        {
+            get
+            {
+                return new DelegateCommand<object>(ChangeSortingTypeForToDoItems);
+            }
+        }
+
+        private void ChangeSortingTypeForToDoItems(object obj)
+        {
+            SortingByAlphabet = !SortingByAlphabet;
+            ToDoItems = SortToDoItems(ToDoItems);
+        }
+
+        private ObservableCollection<ToDoItem>SortToDoItems(ObservableCollection<ToDoItem> _toDoItems)
+        {
+            if(SortingByAlphabet)
+            {
+                return _toDoItemSortHelper.SortByAlphabet(_toDoItems);
+            }
+            else
+            {
+                return _toDoItemSortHelper.SortByCreatedDate(_toDoItems);
             }
         }
 
@@ -141,5 +173,36 @@ namespace ToDoListApp.ViewModels
             }
         }
 
+        public bool SortingByAlphabet
+        {
+            get
+            {
+                return _sortingByAplhabet;
+            }
+            set
+            {
+                SetProperty(ref _sortingByAplhabet, value);
+                if(_sortingByAplhabet)
+                {
+                    SortingTypeImage = "sort_by_alphabet.png";
+                }
+                else
+                {
+                    SortingTypeImage = "sort_by_date.png";
+                }
+            }
+        }
+
+        public string SortingTypeImage
+        {
+            get
+            {
+                return _sortingTypeImage;
+            }
+            set
+            {
+                SetProperty(ref _sortingTypeImage, value);
+            }
+        }
     }
 }

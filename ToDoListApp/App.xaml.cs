@@ -1,5 +1,4 @@
 ﻿using Akavache;
-using ToDoListApp.Views.Start;
 using ToDoListApp.XAML.Behaviors;
 using Microsoft.Practices.Unity;
 using Prism.Navigation;

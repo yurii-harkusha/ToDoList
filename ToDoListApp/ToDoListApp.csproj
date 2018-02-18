@@ -29,7 +29,6 @@
   </PropertyGroup>
   <ItemGroup>
     <EmbeddedResource Include="App.xaml" />
-    <EmbeddedResource Include="Views\Start\StartView.xaml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.xaml.cs">
@@ -61,10 +60,6 @@
     <Compile Include="Views\Pages\ToDoListPage.xaml.cs">
       <DependentUpon>ToDoListPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Start\StartView.xaml.cs">
-      <DependentUpon>StartView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Start\StartViewModel.cs" />
     <Compile Include="XAML\Behaviors\ListViewClearSelectionBehavior.cs" />
     <Compile Include="XAML\Converters\InverseBoolConverter.cs" />
   </ItemGroup>
