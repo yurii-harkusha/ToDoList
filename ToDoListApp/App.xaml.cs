@@ -33,7 +33,8 @@ namespace ToDoListApp
             }
 
             this.Container.RegisterTypeForNavigation<ToDoListAppNavigationPage, ToDoListAppNavigationPageViewModel>()
-                .RegisterTypeForNavigation<ToDoListPage, ToDoListPageViewModel>();
+                .RegisterTypeForNavigation<ToDoListPage, ToDoListPageViewModel>()
+                .RegisterTypeForNavigation<ToDoItemPage, ToDoItemPageViewModel>();
 
             ContainerManager.Container = Container;
         }

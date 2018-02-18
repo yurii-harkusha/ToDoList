@@ -28,6 +28,7 @@
             <ListView.Header>
                 <Button HeightRequest="75"
                         BorderColor="#BDBDBD"
+                        Command="{Binding CreateNewItemCommand}"
                         BorderRadius="1"
                         Margin="12,15,12,5"
                         Image="new_to_do_item_create.png"

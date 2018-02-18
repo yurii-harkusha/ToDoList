@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<behaviors:BaseContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+                 xmlns:local="clr-namespace:ToDoListApp"
+                 xmlns:cardView="clr-namespace:CardView;assembly=CardView"
+                 xmlns:behaviors="clr-namespace:ToDoListApp.XAML.Behaviors;assembly=ToDoListApp"
+                 xmlns:behaviors1="clr-namespace:Corcav.Behaviors;assembly=Corcav.Behaviors"
+                 xmlns:customElements="clr-namespace:ToDoListApp.Views.CustomElements;assembly=ToDoListApp"
+                 xmlns:mvvm="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+                 x:Class="ToDoListApp.ToDoItemPage"
+                 x:Name="RootElement"
+                 mvvm:ViewModelLocator.AutowireViewModel="True" >
+    <behaviors:BaseContentPage.Content>
+        <ScrollView HorizontalOptions="FillAndExpand" 
+                    VerticalOptions="FillAndExpand">
+
+            <StackLayout 
+                Orientation="Vertical" 
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="FillAndExpand">
+                <cardView:CardView 
+                    BackgroundColor="#E8EAF6" 
+                    Margin="15,15,15,15" 
+                    CardViewHasShadow="True"
+                    CardViewHorizontalOptions="FillAndExpand"
+                    HorizontalOptions="FillAndExpand"
+                    MinimumHeightRequest="300"
+                    VerticalOptions="FillAndExpand">
+                    <cardView:CardView.CardViewContent>
+                        <ScrollView 
+                            HorizontalOptions="FillAndExpand" 
+                            VerticalOptions="FillAndExpand">
+                            <Grid HorizontalOptions="FillAndExpand" 
+                                            VerticalOptions="FillAndExpand">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="1*" />
+                                    <RowDefinition Height="4*" />
+                                </Grid.RowDefinitions>
+
+                                <Entry
+                                    Grid.Row="0"
+                                    Margin="10,0,10,0"
+                                    HorizontalOptions="FillAndExpand"
+                                    VerticalOptions="Center"
+                                    TextColor="Black"
+                                    Placeholder="Title"
+                                    Text="Hello title !!!!!!"
+                                    FontSize="36"/>
+                                <customElements:ToDoEditor
+                                    Placeholder="To Do Description"
+                                    Margin="10,0,10,0"
+                                    Grid.Row="1"
+                                    HorizontalOptions="FillAndExpand" 
+                                    VerticalOptions="FillAndExpand"
+                                    TextColor="Black"
+                                    FontSize="16">
+                                </customElements:ToDoEditor>
+                            </Grid>
+                        </ScrollView>
+                    </cardView:CardView.CardViewContent>
+                </cardView:CardView>
+                <Button 
+                    HeightRequest="75"
+                    BorderColor="#BDBDBD"
+                    Command="{Binding CreateNewItemCommand}"
+                    BorderRadius="1"
+                    Margin="12,5,12,15"
+                    Image="save_changes.png"
+                    Text="Save changes"
+                    TextColor="Black"
+                    BackgroundColor="#F8BBD0"
+                    FontSize="20"/>
+            </StackLayout>
+        </ScrollView>
+    </behaviors:BaseContentPage.Content>
+</behaviors:BaseContentPage>

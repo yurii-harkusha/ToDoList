@@ -69,6 +69,19 @@ namespace ToDoListApp.ViewModels
             }
         }
 
+        public ICommand CreateNewItemCommand
+        {
+            get
+            {
+                return new DelegateCommand<object>(CreateNewItemAsync);
+            }
+        }
+
+        private async void CreateNewItemAsync(object obj)
+        {
+            await _navigationService.NavigateAsync(name: nameof(ToDoItemPage), parameters: null, useModalNavigation: false, animated: true);
+        }
+
         private void ToDoItemSelectedAsync(object arg)
         {
             var selectedToDoItem = ((ItemTappedEventArgs)arg).Item as ToDoItem;
