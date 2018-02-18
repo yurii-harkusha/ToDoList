@@ -10,10 +10,14 @@
                  x:Class="ToDoListApp.ToDoItemPage"
                  x:Name="RootElement"
                  mvvm:ViewModelLocator.AutowireViewModel="True" >
+    <behaviors:BaseContentPage.ToolbarItems>
+        <ToolbarItem 
+            Icon="remove_white_toolbar_item.png" 
+            Command="{Binding RemoveCurrentToDoItemCommand}"/>
+    </behaviors:BaseContentPage.ToolbarItems>
     <behaviors:BaseContentPage.Content>
         <ScrollView HorizontalOptions="FillAndExpand" 
                     VerticalOptions="FillAndExpand">
-
             <StackLayout 
                 Orientation="Vertical" 
                 HorizontalOptions="FillAndExpand"
@@ -44,10 +48,11 @@
                                     VerticalOptions="Center"
                                     TextColor="Black"
                                     Placeholder="Title"
-                                    Text="Hello title !!!!!!"
+                                    Text="{Binding CurrentToDoItem.Title, Mode=TwoWay}"
                                     FontSize="36"/>
                                 <customElements:ToDoEditor
-                                    Placeholder="To Do Description"
+                                    Placeholder="Details"
+                                    Text="{Binding CurrentToDoItem.Text, Mode=TwoWay}"
                                     Margin="10,0,10,0"
                                     Grid.Row="1"
                                     HorizontalOptions="FillAndExpand" 
@@ -62,7 +67,7 @@
                 <Button 
                     HeightRequest="75"
                     BorderColor="#BDBDBD"
-                    Command="{Binding CreateNewItemCommand}"
+                    Command="{Binding SaveToDoItemCommand}"
                     BorderRadius="1"
                     Margin="12,5,12,15"
                     Image="save_changes.png"

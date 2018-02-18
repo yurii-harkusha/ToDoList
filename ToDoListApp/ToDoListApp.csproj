@@ -36,6 +36,7 @@
     </Compile>
     <Compile Include="AutoMapperConfiguration.cs" />
     <Compile Include="Helpers\ToDoItemSortHelper.cs" />
+    <Compile Include="Interfaces\IDataService.cs" />
     <Compile Include="Models\DTO\BaseDto.cs" />
     <Compile Include="Models\Enums\ToDoItemStatuses.cs" />
     <Compile Include="Models\ToDoItem.cs" />
@@ -49,6 +50,10 @@
     <Compile Include="AkavacheSqliteLinkerOverride.cs" />
     <Compile Include="Helpers\Settings.cs" />
     <Compile Include="Services\FakeDataService.cs" />
+    <Compile Include="Services\HttpService\HttpRequestModels.cs" />
+    <Compile Include="Services\HttpService\HttpRequestService.cs" />
+    <Compile Include="Services\ToDoItemsCacheDataService.cs" />
+    <Compile Include="Services\ToDoItemsHTTPDataService.cs" />
     <Compile Include="ViewModels\ToDoItemPageViewModel.cs" />
     <Compile Include="ViewModels\ToDoListAppNavigationPageViewModel.cs" />
     <Compile Include="ViewModels\ToDoListPageViewModel.cs" />

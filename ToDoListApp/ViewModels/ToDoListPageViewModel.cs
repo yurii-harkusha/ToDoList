@@ -13,28 +13,28 @@ using ToDoListApp.Services;
 using Xamarin.Forms;
 using Acr.UserDialogs;
 using ToDoListApp.Helpers;
+using Akavache;
 
 namespace ToDoListApp.ViewModels
 {
     public class ToDoListPageViewModel : BaseViewModel
     {
         private INavigationService _navigationService;
-        private ObservableCollection<ToDoItem> _toDoItemsObservableCollection;
-        private FakeDataService _fakeDataService;
         private ObservableCollection<ToDoItem> _toDoItems;
-        private ToDoItem _selectedToDoItem;
         private bool _sortingByAplhabet;
         private string _sortingTypeImage;
         private ToDoItemSortHelper _toDoItemSortHelper;
+        private ToDoItemsCacheDataService _toDoItemsCacheDataService;
 
-        public ToDoListPageViewModel(INavigationService navigationService, INavigationServiceManager nsm)
+        public ToDoListPageViewModel(INavigationService navigationService, 
+            INavigationServiceManager nsm,
+            ToDoItemsCacheDataService toDoItemsCacheDataService)
             : base(navigationService, nsm)
         {
             _navigationService = navigationService;
+            _toDoItemsCacheDataService = toDoItemsCacheDataService;
             _toDoItemSortHelper = new ToDoItemSortHelper();
-            _fakeDataService = new FakeDataService();
-            SortingByAlphabet = true;
-            ToDoItems = SortToDoItems(_fakeDataService.GetToDoItemsObservableCollection());
+            SortingByAlphabet = Settings.SortingByAlphabet;
         }
 
         public override void OnNavigatedTo(NavigationParameters parameters)
@@ -45,7 +45,15 @@ namespace ToDoListApp.ViewModels
         protected override async Task OnAppearingView(bool isFirstAppear)
         {
             await base.OnAppearingView(isFirstAppear);
+
+            var toDoItemsList = await _toDoItemsCacheDataService.GetToDoItemsAsync();
+
+            if (toDoItemsList != null)
+            {
+                ToDoItems = SortToDoItems(new ObservableCollection<ToDoItem>(toDoItemsList));
+            }
         }
+
         public override void OnNavigatedFrom(NavigationParameters parameters)
         {
             base.OnNavigatedFrom(parameters);
@@ -94,6 +102,7 @@ namespace ToDoListApp.ViewModels
         private void ChangeSortingTypeForToDoItems(object obj)
         {
             SortingByAlphabet = !SortingByAlphabet;
+            Settings.SortingByAlphabet = SortingByAlphabet;
             ToDoItems = SortToDoItems(ToDoItems);
         }
 
@@ -114,13 +123,17 @@ namespace ToDoListApp.ViewModels
             await _navigationService.NavigateAsync(name: nameof(ToDoItemPage), parameters: null, useModalNavigation: false, animated: true);
         }
 
-        private void ToDoItemSelectedAsync(object arg)
+        private async void ToDoItemSelectedAsync(object arg)
         {
             var selectedToDoItem = ((ItemTappedEventArgs)arg).Item as ToDoItem;
 
             if (selectedToDoItem != null)
             {
-
+                var navParams = new NavigationParameters
+                {
+                    { "toDoItem", selectedToDoItem }
+                };
+                await _navigationService.NavigateAsync(name: nameof(ToDoItemPage), parameters: navParams, useModalNavigation: false, animated: true);
             }
         }
 
@@ -132,7 +145,11 @@ namespace ToDoListApp.ViewModels
             {
                 if (await UserDialogs.Instance.ConfirmAsync($"Are you sure that you want to remove the item?", "Remove", "Yes", "Cancel"))
                 {
-                    ToDoItems.Remove(ToDoItems.Where(x => x.Id == selectedToDoItem.Id).FirstOrDefault());
+                    if (ToDoItems != null)
+                    {
+                        ToDoItems.Remove(ToDoItems.Where(x => x.Id == selectedToDoItem.Id).FirstOrDefault());
+                        _toDoItemsCacheDataService.SaveOrUpdateToDoItemsAsync(ToDoItems.ToList());
+                    }
                 }
             }
         }
@@ -157,6 +174,10 @@ namespace ToDoListApp.ViewModels
                 {
                     bool isNewStatusValueDone = !isOldStatusValueDone;
                     ToDoItems.Where(x => x.Id == selectedToDoItem.Id).FirstOrDefault().IsDone = isNewStatusValueDone;
+                    if (ToDoItems != null)
+                    {
+                        _toDoItemsCacheDataService.SaveOrUpdateToDoItemsAsync(ToDoItems.ToList());
+                    }
                 }
             }
         }

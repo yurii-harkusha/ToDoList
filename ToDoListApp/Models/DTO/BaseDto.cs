@@ -15,11 +15,9 @@ namespace ToDoListApp.Models.DTO
 
         public BaseDto()
         {
-            Id = Guid.NewGuid().ToString().ToUpper();
-            CreatedDate = DateTime.Now;
-            ModifiedDate = DateTime.Now;
+
         }
-        public string Id { get;}
+        public string Id { get; set; }
 
         public DateTime CreatedDate
         {

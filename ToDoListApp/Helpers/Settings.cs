@@ -23,10 +23,14 @@ namespace ToDoListApp.Helpers
 		private const string SettingsKey = "settings_key";
 		private static readonly string SettingsDefault = string.Empty;
 
-		#endregion
+
+        private const string SortingByAlphabetKey = "sorting_by_alphabet";
+        private static readonly bool SortingByAlphabetDefault = true;
+
+        #endregion
 
 
-		public static string GeneralSettings
+        public static string GeneralSettings
 		{
 			get
 			{
@@ -38,5 +42,16 @@ namespace ToDoListApp.Helpers
 			}
 		}
 
-	}
+        public static bool SortingByAlphabet
+        {
+            get
+            {
+                return AppSettings.GetValueOrDefault(SortingByAlphabetKey, SortingByAlphabetDefault);
+            }
+            set
+            {
+                AppSettings.AddOrUpdateValue(SortingByAlphabetKey, value);
+            }
+        }
+    }
 }
