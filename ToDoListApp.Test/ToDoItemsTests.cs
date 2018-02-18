@@ -11,17 +11,6 @@ namespace ToDoListApp.Test
     public class ToDoItemsTests
     {
         [TestMethod]
-        public void CheckIfIDsAreDiferentOnCreation()
-        {
-            var toDoItem1 = new ToDoItem();
-            var toDoItem2 = new ToDoItem();
-            var toDoItem3 = new ToDoItem();
-            Assert.AreNotEqual(toDoItem1.Id, toDoItem2.Id);
-            Assert.AreNotEqual(toDoItem2.Id, toDoItem3.Id);
-            Assert.AreNotEqual(toDoItem3.Id, toDoItem1.Id);
-        }
-
-        [TestMethod]
         public void CheckIfToDoItemsSortByAlphabetIsCorrect()
         {
             var toDoItemSortHelper = new ToDoItemSortHelper();

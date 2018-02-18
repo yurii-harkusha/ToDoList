@@ -143,7 +143,10 @@ namespace ToDoListApp.ViewModels
 
             if (selectedToDoItem != null)
             {
-                if (await UserDialogs.Instance.ConfirmAsync($"Are you sure that you want to remove the item?", "Remove", "Yes", "Cancel"))
+                if (await UserDialogs.Instance.ConfirmAsync(Application.Current.Resources["AreYouSureRemoveText"].ToString(),
+                Application.Current.Resources["RemoveText"].ToString(),
+                Application.Current.Resources["YesText"].ToString(),
+                Application.Current.Resources["CancelText"].ToString()))
                 {
                     if (ToDoItems != null)
                     {
@@ -207,11 +210,11 @@ namespace ToDoListApp.ViewModels
                 SetProperty(ref _sortingByAplhabet, value);
                 if(_sortingByAplhabet)
                 {
-                    SortingTypeImage = "sort_by_alphabet.png";
+                    SortingTypeImage = Application.Current.Resources["SortByAlphabetImage"].ToString(); 
                 }
                 else
                 {
-                    SortingTypeImage = "sort_by_date.png";
+                    SortingTypeImage = Application.Current.Resources["SortByDateImage"].ToString();
                 }
             }
         }

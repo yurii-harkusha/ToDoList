@@ -27,15 +27,12 @@
       <x:String x:Key="ActiveText">active</x:String>
       <x:String x:Key="DoneText">done</x:String>
 
-
-
-
       <x:String x:Key="SaveChangesImage">save_changes.png</x:String>
       <x:String x:Key="RemoveWhiteToolbarItemImage">remove_white_toolbar_item.png</x:String>
       <x:String x:Key="NewToDoItemCreateImage">new_to_do_item_create.png</x:String>
       <x:String x:Key="RemoveToDoItemImage">remove_to_do_item.png</x:String>
-      
-
+      <x:String x:Key="SortByAlphabetImage">sort_by_alphabet.png</x:String>
+      <x:String x:Key="SortByDateImage">sort_by_date.png</x:String>
 
       <behaviors:InverseBoolConverter x:Key="InverseBoolConverter"/>
 			</ResourceDictionary>
