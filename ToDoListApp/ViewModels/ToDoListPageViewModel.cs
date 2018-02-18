@@ -18,7 +18,7 @@ namespace ToDoListApp.ViewModels
     public class ToDoListPageViewModel : BaseViewModel
     {
         private INavigationService _navigationService;
-        private  ObservableCollection<ToDoItem> _toDoItemsObservableCollection;
+        private ObservableCollection<ToDoItem> _toDoItemsObservableCollection;
         private FakeDataService _fakeDataService;
         private ObservableCollection<ToDoItem> _toDoItems;
         private ToDoItem _selectedToDoItem;

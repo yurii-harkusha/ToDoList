@@ -290,6 +290,15 @@
   <ItemGroup>
     <BundleResource Include="Resources\remove_to_do_item%403x.png" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\save_changes.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\save_changes%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\save_changes%403x.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Forms.2.5.0.122203\build\netstandard1.0\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.2.5.0.122203\build\netstandard1.0\Xamarin.Forms.targets')" />
 </Project>

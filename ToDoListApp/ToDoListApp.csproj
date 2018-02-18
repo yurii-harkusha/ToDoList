@@ -36,6 +36,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="AutoMapperConfiguration.cs" />
+    <Compile Include="Helpers\ToDoItemSortHelper.cs" />
     <Compile Include="Models\DTO\BaseDto.cs" />
     <Compile Include="Models\Enums\ToDoItemStatuses.cs" />
     <Compile Include="Models\ToDoItem.cs" />

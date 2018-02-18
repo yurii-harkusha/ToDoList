@@ -132,7 +132,7 @@
                                                         VerticalTextAlignment="Center"/>
                                                     <Label
                                                         LineBreakMode="TailTruncation"
-                                                        Text="{Binding ItemCreatedDate}"
+                                                        Text="{Binding CreatedDate}"
                                                         FontSize="13"
                                                         VerticalOptions="Center"
                                                         VerticalTextAlignment="Center"/>

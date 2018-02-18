@@ -14,8 +14,11 @@ namespace ToDoListApp.Models
     public class ToDoItem : ToDoItemDto, INotifyPropertyChanged
     {
         private bool _isDone;
-        private DateTime _itemCreatedDate;
-        private DateTime _itemModifiedDate;
+
+        public ToDoItem()
+        {
+            
+        }
 
         public new bool IsDone
         {
@@ -66,26 +69,6 @@ namespace ToDoListApp.Models
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        public DateTime ItemCreatedDate
-        {
-            get { return _itemCreatedDate; }
-            set
-            {
-                _itemCreatedDate = value;
-                OnPropertyChanged(nameof(ItemCreatedDate));
-            }
-        }
-
-        public DateTime ItemModifiedDate
-        {
-            get { return _itemModifiedDate; }
-            set
-            {
-                _itemModifiedDate = value;
-                OnPropertyChanged(nameof(ItemModifiedDate));
-            }
         }
     }
 }

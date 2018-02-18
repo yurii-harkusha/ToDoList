@@ -8,6 +8,11 @@ namespace ToDoListApp.Models.DTO
 {
     public class ToDoItemDto : BaseDto
     {
+        public ToDoItemDto()
+        {
+
+        }
+
         public string AuthorId { get; set; }
         public string Title { get; set; }
         public string Text { get; set; }
