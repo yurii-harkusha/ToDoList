@@ -14,6 +14,7 @@ using Xamarin.Forms;
 using Acr.UserDialogs;
 using ToDoListApp.Helpers;
 using Akavache;
+using ToDoListApp.Interfaces;
 
 namespace ToDoListApp.ViewModels
 {
@@ -24,15 +25,15 @@ namespace ToDoListApp.ViewModels
         private bool _sortingByAplhabet;
         private string _sortingTypeImage;
         private ToDoItemSortHelper _toDoItemSortHelper;
-        private ToDoItemsCacheDataService _toDoItemsCacheDataService;
+        private IDataService _dataService;
 
         public ToDoListPageViewModel(INavigationService navigationService, 
             INavigationServiceManager nsm,
-            ToDoItemsCacheDataService toDoItemsCacheDataService)
+            IDataService toDoItemsCacheDataService)
             : base(navigationService, nsm)
         {
             _navigationService = navigationService;
-            _toDoItemsCacheDataService = toDoItemsCacheDataService;
+            _dataService = toDoItemsCacheDataService;
             _toDoItemSortHelper = new ToDoItemSortHelper();
             SortingByAlphabet = Settings.SortingByAlphabet;
         }
@@ -46,7 +47,7 @@ namespace ToDoListApp.ViewModels
         {
             await base.OnAppearingView(isFirstAppear);
 
-            var toDoItemsList = await _toDoItemsCacheDataService.GetToDoItemsAsync();
+            var toDoItemsList = await _dataService.GetToDoItemsAsync();
 
             if (toDoItemsList != null)
             {
@@ -143,15 +144,15 @@ namespace ToDoListApp.ViewModels
 
             if (selectedToDoItem != null)
             {
-                if (await UserDialogs.Instance.ConfirmAsync(Application.Current.Resources["AreYouSureRemoveText"].ToString(),
-                Application.Current.Resources["RemoveText"].ToString(),
-                Application.Current.Resources["YesText"].ToString(),
-                Application.Current.Resources["CancelText"].ToString()))
+                if (await UserDialogs.Instance.ConfirmAsync(AppResource.AreYouSureRemoveText,
+                AppResource.RemoveText,
+                AppResource.YesText,
+                AppResource.CancelText))
                 {
                     if (ToDoItems != null)
                     {
                         ToDoItems.Remove(ToDoItems.Where(x => x.Id == selectedToDoItem.Id).FirstOrDefault());
-                        _toDoItemsCacheDataService.SaveOrUpdateToDoItemsAsync(ToDoItems.ToList());
+                        _dataService.SaveOrUpdateToDoItemsAsync(ToDoItems.ToList());
                     }
                 }
             }
@@ -166,22 +167,22 @@ namespace ToDoListApp.ViewModels
                 string statusNameForQuestion;
                 if (isOldStatusValueDone)
                 {
-                    statusNameForQuestion = Application.Current.Resources["ActiveText"].ToString();
+                    statusNameForQuestion = AppResource.ActiveText;
                 }
                 else
                 {
-                    statusNameForQuestion = Application.Current.Resources["DoneText"].ToString();
+                    statusNameForQuestion = AppResource.DoneText;
                 }
-                if (await UserDialogs.Instance.ConfirmAsync($"{Application.Current.Resources["AreYouSureMarkItemText"].ToString()} {statusNameForQuestion}?", 
-                    Application.Current.Resources["ChangeStatusText"].ToString(), 
-                    Application.Current.Resources["YesText"].ToString(), 
-                    Application.Current.Resources["CancelText"].ToString()))
+                if (await UserDialogs.Instance.ConfirmAsync($"{AppResource.AreYouSureMarkItemText} {statusNameForQuestion}?", 
+                    AppResource.ChangeStatusText, 
+                    AppResource.YesText, 
+                    AppResource.CancelText))
                 {
                     bool isNewStatusValueDone = !isOldStatusValueDone;
                     ToDoItems.Where(x => x.Id == selectedToDoItem.Id).FirstOrDefault().IsDone = isNewStatusValueDone;
                     if (ToDoItems != null)
                     {
-                        _toDoItemsCacheDataService.SaveOrUpdateToDoItemsAsync(ToDoItems.ToList());
+                        _dataService.SaveOrUpdateToDoItemsAsync(ToDoItems.ToList());
                     }
                 }
             }
@@ -228,6 +229,30 @@ namespace ToDoListApp.ViewModels
             set
             {
                 SetProperty(ref _sortingTypeImage, value);
+            }
+        }
+
+        public string CreateNewItemText
+        {
+            get
+            {
+                return AppResource.CreateNewItemText;
+            }
+        }
+
+        public string CreatedText
+        {
+            get
+            {
+                return AppResource.CreatedText;
+            }
+        }
+
+        public string StatusText
+        {
+            get
+            {
+                return AppResource.StatusText;
             }
         }
     }

@@ -48,11 +48,11 @@
                                     HorizontalOptions="FillAndExpand"
                                     VerticalOptions="Center"
                                     TextColor="Black"
-                                    Placeholder="{StaticResource TitlePlaceholderText}"
+                                    Placeholder="{Binding TitlePlaceholderText}"
                                     Text="{Binding CurrentToDoItem.Title, Mode=TwoWay}"
                                     FontSize="36"/>
                                 <customElements:ToDoEditor
-                                    Placeholder="{StaticResource DetailsPlaceholderText}"
+                                    Placeholder="{Binding DetailsPlaceholderText}"
                                     Text="{Binding CurrentToDoItem.Text, Mode=TwoWay}"
                                     Margin="10,0,10,0"
                                     Grid.Row="1"
@@ -72,7 +72,7 @@
                     BorderRadius="1"
                     Margin="12,5,12,15"
                     Image="{StaticResource SaveChangesImage}"
-                    Text="{StaticResource SaveChangesText}"
+                    Text="{Binding SaveChangesText}"
                     TextColor="Black"
                     BackgroundColor="{StaticResource ButtonBackgroundColor}"
                     FontSize="20"/>

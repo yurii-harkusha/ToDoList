@@ -34,6 +34,11 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AppResource.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AppResource.resx</DependentUpon>
+    </Compile>
     <Compile Include="AutoMapperConfiguration.cs" />
     <Compile Include="Helpers\ToDoItemSortHelper.cs" />
     <Compile Include="Interfaces\IDataService.cs" />
@@ -200,6 +205,10 @@
     <Folder Include="Utils\" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="AppResource.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>AppResource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\Pages\ToDoListPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>

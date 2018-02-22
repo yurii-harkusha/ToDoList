@@ -5,6 +5,8 @@ using Prism.Navigation;
 using Prism.Unity;
 using ToDoListApp.ViewModels;
 using ToDoListApp.Views.Pages;
+using ToDoListApp.Interfaces;
+using ToDoListApp.Services;
 
 namespace ToDoListApp
 {
@@ -30,6 +32,8 @@ namespace ToDoListApp
                 Container.RegisterInstance<INavigationServiceManager>(nsm);
                 nsm.Attach(Container.Resolve<INavigationService>("UnityPageNavigationService"));
             }
+
+            Container.RegisterType<IDataService, ToDoItemsCacheDataService>();
 
             this.Container.RegisterTypeForNavigation<ToDoListAppNavigationPage, ToDoListAppNavigationPageViewModel>()
                 .RegisterTypeForNavigation<ToDoListPage, ToDoListPageViewModel>()

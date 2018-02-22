@@ -10,6 +10,7 @@ using ToDoListApp.Models;
 using ToDoListApp.Services;
 using Xamarin.Forms;
 using Acr.UserDialogs;
+using ToDoListApp.Interfaces;
 
 namespace ToDoListApp.ViewModels
 {
@@ -17,15 +18,15 @@ namespace ToDoListApp.ViewModels
     {
         private INavigationService _navigationService;
         private ToDoItem _currentToDoItem;
-        private ToDoItemsCacheDataService _toDoItemsCacheDataService;
+        private IDataService _dataService;
 
         public ToDoItemPageViewModel(INavigationService navigationService, 
             INavigationServiceManager nsm,
-            ToDoItemsCacheDataService toDoItemsCacheDataService)
+            IDataService dataService)
             : base(navigationService, nsm)
         {
             _navigationService = navigationService;
-            _toDoItemsCacheDataService = toDoItemsCacheDataService;
+            _dataService = dataService;
         }
 
         public override void OnNavigatedTo(NavigationParameters parameters)
@@ -81,7 +82,7 @@ namespace ToDoListApp.ViewModels
         {
             if (CurrentToDoItem != null)
             {
-                var toDoItems = await _toDoItemsCacheDataService.GetToDoItemsAsync();
+                var toDoItems = await _dataService.GetToDoItemsAsync();
                 if (toDoItems != null)
                 {
                     var currentItemInCache = toDoItems.Where(x => x.Id == CurrentToDoItem.Id).FirstOrDefault();
@@ -101,25 +102,25 @@ namespace ToDoListApp.ViewModels
                     toDoItems = new List<ToDoItem>();
                     toDoItems.Add(CurrentToDoItem);
                 }
-                _toDoItemsCacheDataService.SaveOrUpdateToDoItemsAsync(toDoItems);
+                _dataService.SaveOrUpdateToDoItemsAsync(toDoItems);
             }            
             await _navigationService.GoBackAsync(null, false, true);
         }
 
         private async void RemoveCurrentToDoItemAsync(object arg)
         {
-            if (await UserDialogs.Instance.ConfirmAsync(Application.Current.Resources["AreYouSureRemoveText"].ToString(),
-                Application.Current.Resources["RemoveText"].ToString(),
-                Application.Current.Resources["YesText"].ToString(),
-                Application.Current.Resources["CancelText"].ToString()))
+            if (await UserDialogs.Instance.ConfirmAsync(AppResource.AreYouSureRemoveText,
+                AppResource.RemoveText,
+                AppResource.YesText,
+                AppResource.CancelText))
             {
-                var toDoItems = await _toDoItemsCacheDataService.GetToDoItemsAsync();
+                var toDoItems = await _dataService.GetToDoItemsAsync();
                 if (toDoItems != null)
                 {
                     if(toDoItems.Where(x => x.Id == CurrentToDoItem.Id).FirstOrDefault() != null)
                     {
                         toDoItems.Remove(toDoItems.Where(x => x.Id == CurrentToDoItem.Id).FirstOrDefault());
-                        _toDoItemsCacheDataService.SaveOrUpdateToDoItemsAsync(toDoItems.ToList());
+                        _dataService.SaveOrUpdateToDoItemsAsync(toDoItems.ToList());
                     }
                 }
                 await _navigationService.GoBackAsync(null, false, true);
@@ -135,6 +136,30 @@ namespace ToDoListApp.ViewModels
             set
             {
                 SetProperty(ref _currentToDoItem, value);
+            }
+        }
+
+        public string TitlePlaceholderText
+        {
+            get
+            {
+                return AppResource.TitlePlaceholderText;
+            }
+        }
+
+        public string DetailsPlaceholderText
+        {
+            get
+            {
+                return AppResource.DetailsPlaceholderText;
+            }
+        }
+
+        public string SaveChangesText
+        {
+            get
+            {
+                return AppResource.SaveChangesText;
             }
         }
     }
